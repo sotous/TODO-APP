@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html ng-app="todo_application">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="assets/stylesheets/style.css">
+    <link rel="stylesheet" href="bower_components/angular-material/angular-material.css">
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+  </head>
+  <body>
+    <div class="container" ng-controller="ToDoController">
+      <div class="row">
+          <ul class="col-md-12">
+            <!--use ToDo. for indentify the controller whit use into app.js in controllerAs-->
+            <!--this eliminate the $scope into the controller-->
+            <div id="myRepeat" ng-repeat="data in activities | orderBy: 'status'">
+              <div id="text" class="col-md-7 col-xs-7 md-body-2">
+                {{data.name}}
+              </div>
+              <div class="col-md-2 col-xs-2">
+                <md-checkbox  aria-label="{{data.status}}"
+                              name="status"
+                              ng-model="data.status"
+                              ng-change="update()">
+                </md-checkbox>
+              </div>
+              <div class="col-md-2 col-xs-2">
+                <a      href=""
+                        ng-click="removeActv(data)"
+                        style="color: red;"
+                        >X</a>
+              </div>
+            </div>
+          </ul>
+      </div>
+
+      <form class="col-md-12 col-xs-12" ng-submit="addActv()">
+        <div class="form-group">
+          <div class="col-md-8 col-xs-12">
+            <input  type    ="text"
+                    class="form-control"
+                    ng-model="newActv.name"
+                    placeholder="Type you activity"
+                    required>
+          </div>
+          <div class="col-md-2 col-xs-6">
+            <md-button  id="form-button"
+                        type="submit"
+                        class="md-raised">Save</md-button>
+          </div>
+          <div class="col-md-2 col-xs-6">
+            <md-button  ng-click="clean()"
+                        id="form-button"
+                        class="md-raised">Delete All</md-button>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <!--build:bower-->
+      <script src="bower_components/jquery/dist/jquery.js"></script>
+      <script src="bower_components/angular/angular.js"></script>
+      <script src="bower_components/angular-route/angular-route.js"></script>
+      <script src="bower_components/angular-local-storage/dist/angular-local-storage.js"></script>
+      <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+      <script src="bower_components/angular-animate/angular-animate.min.js"></script>
+      <script src="bower_components/angular-aria/angular-aria.min.js"></script>
+      <script src="bower_components/angular-messages/angular-messages.min.js"></script>
+      <script src="bower_components/angular-material/angular-material.js"></script>
+    <!--End: bower-->
+    <!--build: angular-->
+      <script src="app/app.js"></script>
+    <!--build: controllers-->
+      <script src="app/controllers/todo.ctrl.js"></script>
+    <!--End: controllers-->
+
+  </body>
+</html>
